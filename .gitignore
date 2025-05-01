@@ -67,19 +67,3 @@ crashlytics-build.properties
 # Packed Addressables
 /[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 
-# Temporary auto-generated Android Assets
-/[Aa]ssets/[Ss]treamingAssets/aa.meta
-/[Aa]ssets/[Ss]treamingAssets/aa/*
-*.meta
-*.asset
-Project Annisa/Assets/3D Object/project-name/source/Project Name/Gltf_Import&Gltf_Import.jpg
-*.fbx
-*.zip
-*.png
-*.jpg
-*.mtl
-*.obj
-*.jpeg
-*.tga
-*.blend
-*.blend1

@@ -7,7 +7,10 @@ public class ButtonChoiceAnimation : BaseButtonVR
 {
     private Renderer _myRenderer;
     [SerializeField] private string nameMove;
+    [SerializeField] private string descriptionMove;
     [SerializeField] private TextMeshPro displayText;
+    [SerializeField] private TextMeshPro displayText2;
+    [SerializeField] private TextMeshPro descriptionText;
     [SerializeField] private Material InactiveMaterial;
     [SerializeField] private Material GazedAtMaterial;
     [SerializeField] private PlayableDirector playableDirector;
@@ -48,6 +51,7 @@ public class ButtonChoiceAnimation : BaseButtonVR
         ChangeDisplayText();
         PlayAudio();
         PlayTimeline();
+        OnPointerExit();
     }
 
     private void PlayTimeline()
@@ -78,6 +82,8 @@ public class ButtonChoiceAnimation : BaseButtonVR
         if (displayText != null)
         {
             displayText.text = nameMove;
+            displayText2.text = nameMove;
+            descriptionText.text = descriptionMove;
         }
     }
 }
