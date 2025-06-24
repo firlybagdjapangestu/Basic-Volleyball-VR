@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+
 public class KeyboardController : MonoBehaviour
 {
     public float walkSpeed = 5f; // Kecepatan jalan biasa
@@ -29,8 +31,8 @@ public class KeyboardController : MonoBehaviour
     void Update()
     {
         MovePlayer();
-        LookAround();
-        Jump();
+        LookAround(); // melihat sekitar menggunakan mouse,
+                      // kalau di export ke VR, ini bisa dihilangkan
     }
 
     void MovePlayer()
@@ -80,13 +82,6 @@ public class KeyboardController : MonoBehaviour
         Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
     }
 
-    void Jump()
-    {
-        // Jika karakter berada di tanah dan tombol space ditekan, lompat
-        if (controller.isGrounded && Input.GetButtonDown("Jump"))
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-        }
-    }
+   
 
 }

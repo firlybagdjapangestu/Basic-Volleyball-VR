@@ -18,9 +18,9 @@ public class BaseButtonVR : MonoBehaviour
         
     }
 
-    protected virtual void Update()
+    private void Update()
     {
-        if (Input.GetButtonDown("Fire1") || Input.GetMouseButtonDown(0))
+        if (Input.GetButtonDown("Fire1") || Input.GetMouseButtonDown(0) || Input.GetButtonDown("Jump"))
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

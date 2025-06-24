@@ -15,7 +15,8 @@ public class VRController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LookDownToMove();
+        LookDownToMove(); // Memeriksa sudut kamera untuk menentukan
+                          // apakah karakter bergerak
         MoveCharacter();
     }
 

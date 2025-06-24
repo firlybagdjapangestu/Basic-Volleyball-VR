@@ -54,7 +54,7 @@ public class ButtonChoiceAnimation : BaseButtonVR
         OnPointerExit();
     }
 
-    private void PlayTimeline()
+    private void PlayTimeline() // jalanin animasi
     {
         if (playableDirector != null && timelineAsset != null)
         {
@@ -63,7 +63,7 @@ public class ButtonChoiceAnimation : BaseButtonVR
         }
     }
 
-    private void PlayAudio()
+    private void PlayAudio() // jalanin audio
     {
         if (audioSource.isPlaying)
         {
@@ -77,7 +77,7 @@ public class ButtonChoiceAnimation : BaseButtonVR
         }
     }
 
-    private void ChangeDisplayText()
+    private void ChangeDisplayText() // ubah text di atas kepala player
     {
         if (displayText != null)
         {
