@@ -6,21 +6,34 @@ public class ButtonHideObject : BaseButtonVR
 {
     public GameObject objectToHide; // Referensi ke objek yang ingin disembunyikan  
     public GameObject objectToShow;
-
+    private Renderer _myRenderer;
+    [SerializeField] private Material InactiveMaterial;
+    [SerializeField] private Material GazedAtMaterial;
 
     protected override void Start()
     {
         base.Start();
+        _myRenderer = GetComponent<Renderer>();
     }
 
     protected override void OnPointerEnter()
     {
+        SetMaterial(true);
         base.OnPointerEnter();
     }
 
     protected override void OnPointerExit()
     {
+        SetMaterial(false);
         base.OnPointerExit();
+    }
+
+    private void SetMaterial(bool gazedAt)
+    {
+        if (InactiveMaterial != null && GazedAtMaterial != null)
+        {
+            _myRenderer.material = gazedAt ? GazedAtMaterial : InactiveMaterial;
+        }
     }
 
 
@@ -28,6 +41,7 @@ public class ButtonHideObject : BaseButtonVR
     {
         // Pastikan OnPointerExit selesai sebelum HideObject dipanggil  
         StartCoroutine(HandleClick());
+        Debug.Log("Clicked on " + gameObject.name); // Debug log untuk memastikan klik terdeteksi
     }
 
     private IEnumerator HandleClick()

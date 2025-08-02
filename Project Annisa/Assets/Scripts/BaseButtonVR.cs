@@ -3,52 +3,76 @@ using UnityEngine;
 
 public class BaseButtonVR : MonoBehaviour
 {
-    public AudioSource audioSource;    
+    public enum TriggerType
+    {
+        Gaze,
+        Input
+    }
+
+    [Header("Interaction Settings")]
+    public TriggerType triggerType = TriggerType.Input;
+    public AudioSource audioSource;
     [SerializeField] private float gazeDuration = 2.0f;
 
     private Coroutine gazeCoroutine;
 
-    protected static AnimationClip selectedAnimation; // Menyimpan animasi yang dipilih
-    protected static Animator sharedAnimator; // Animator yang dipakai oleh semua button
-    protected static AudioClip selectedAudioClip; // Menyimpan audio yang dipilih
+    protected static AnimationClip selectedAnimation;
+    protected static Animator sharedAnimator;
+    protected static AudioClip selectedAudioClip;
     protected static string nameMove;
 
     protected virtual void Start()
     {
-        
+        // Kosong, bisa diisi oleh subclass
     }
 
     private void Update()
     {
+        switch (triggerType)
+        {
+            case TriggerType.Input:
+                HandleInputTrigger();
+                break;
+        }
+    }
+
+    private void HandleInputTrigger()
+    {
         if (Input.GetButtonDown("Fire1") || Input.GetMouseButtonDown(0) || Input.GetButtonDown("Jump"))
         {
-            RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == gameObject)
             {
-                if (hit.collider.gameObject == gameObject)
-                {
-                    OnClickTrigger();
-                }
+                OnClickTrigger();
             }
         }
     }
 
+
     protected virtual void OnPointerEnter()
     {
-
+        if (triggerType == TriggerType.Gaze)
+        {
+            gazeCoroutine = StartCoroutine(GazeTrigger());
+        }
     }
 
     protected virtual void OnPointerExit()
     {
-
+        if (triggerType == TriggerType.Gaze && gazeCoroutine != null)
+        {
+            StopCoroutine(gazeCoroutine);
+        }
     }
 
+    private IEnumerator GazeTrigger()
+    {
+        yield return new WaitForSeconds(gazeDuration);
+        OnClickTrigger();
+    }
 
     protected virtual void OnClickTrigger()
     {
-        // Fungsi ini akan di-override oleh button spesifik
+        // Di-override oleh subclass
     }
-
-    
 }
